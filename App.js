@@ -1,5 +1,12 @@
 import React, {useState} from 'react';
-import {StyleSheet, Image, View, Text, TouchableOpacity} from 'react-native';
+import {
+  StyleSheet,
+  Image,
+  View,
+  Text,
+  TouchableOpacity,
+  Button,
+} from 'react-native';
 
 import {RNCamera} from 'react-native-camera';
 
@@ -32,7 +39,19 @@ const App = () => {
     <>
       <View style={styles.container}>
         {image ? (
-          <Text>Image is Present</Text>
+          <View style={styles.preview}>
+            <Text style={styles.camText}>Here is your profile picture</Text>
+            <Image
+              style={styles.clicked}
+              source={{uri: image, width: '100%', height: '80%'}}
+            />
+            <Button
+              style={{marginTop: 50}}
+              title="Click another picture"
+              onPress={() => {
+                setImage(null);
+              }}></Button>
+          </View>
         ) : (
           <RNCamera
             style={styles.preview}
@@ -94,5 +113,21 @@ const styles = StyleSheet.create({
     backgroundColor: 'orange',
     padding: 10,
     alignSelf: 'center',
+  },
+
+  camText: {
+    width: '100%',
+    backgroundColor: '#3498DB',
+    paddingVertical: 20,
+    textAlign: 'center',
+    marginTop: 20,
+    fontSize: 20,
+    color: 'white',
+  },
+
+  clicked: {
+    width: 300,
+    height: 300,
+    borderRadius: 150,
   },
 });
